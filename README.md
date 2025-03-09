@@ -39,7 +39,6 @@ day_df['season_name'] = day_df['season'].map(season_map)
 
 st.title("Dashboard Bike Sharing")
 
-# 1️⃣ Grafik: Penyewaan Sepeda Berdasarkan Musim
 st.subheader("Total Penyewaan Sepeda Berdasarkan Musim")
 season_rentals = day_df.groupby('season_name')['cnt'].sum().reset_index()
 fig1 = px.bar(season_rentals, x='season_name', y='cnt', 
@@ -47,7 +46,6 @@ fig1 = px.bar(season_rentals, x='season_name', y='cnt',
               color='season_name')
 st.plotly_chart(fig1)
 
-# 2️⃣ Grafik: Perbandingan Penyewaan Sepeda pada Hari Kerja vs Akhir Pekan
 st.subheader("Penyewaan Sepeda pada Hari Kerja vs Akhir Pekan")
 day_df['day_type'] = day_df['weekday'].apply(lambda x: 'Weekday' if x < 5 else 'Weekend')
 day_type_rentals = day_df.groupby('day_type')['cnt'].mean().reset_index()
@@ -56,7 +54,6 @@ fig2 = px.bar(day_type_rentals, x='day_type', y='cnt',
               color='day_type')
 st.plotly_chart(fig2)
 
-# 3️⃣ Grafik: Korelasi Cuaca dengan Penyewaan Sepeda
 st.subheader("Pengaruh Suhu terhadap Penyewaan Sepeda")
 fig3 = px.scatter(day_df, x='temp', y='cnt', color='season_name', 
                   labels={'temp': 'Temperatur (Normalisasi)', 'cnt': 'Jumlah Penyewaan'},
